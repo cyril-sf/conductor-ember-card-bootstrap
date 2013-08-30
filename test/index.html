@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>QUnit Example</title>
+  <link rel="stylesheet" href="qunit/qunit-1.12.0.css">
+  <script src="qunit/qunit-1.12.0.js"></script>
+  <script src="jquery.js"></script>
+  <script src="conductor-0.2.0.js.html"></script>
+  <script src="test/card_test.js"></script>
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+  <script type="text/javascript">
+    var n = 0;
+    // hacky setTimeout approach because of problems with jquery's delegate in
+    // ie8.
+    function hidePassedTestsByDefault() {
+      var qt = $('#qunit-tests'),
+          qfp = $('#qunit-filter-pass');
+
+      if (qt.length && qfp.length) {
+        qt.addClass('hidepass');
+        qfp.prop('checked', true);
+      } else if (++n < 10) {
+        setTimeout(hidePassedTestsByDefault, 100);
+      }
+    }
+
+    $(document).ready(hidePassedTestsByDefault);
+  </script>
+</body>
+</html>
